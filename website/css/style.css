@@ -1,0 +1,138 @@
+/* ===== FARBEN: hier ändern, gilt für die ganze Seite ===== */
+:root {
+  --haupt: #1F4E5F;        /* Petrol */
+  --haupt-dunkel: #173B49; /* Fußbereich */
+  --akzent: #B34700;       /* Orange, nur für Buttons und Links */
+  --papier: #F5F2EC;       /* Hintergrund Startbereich/Service */
+  --weiss: #FFFFFF;
+  --text: #222B30;
+  --text-leise: #4A565C;
+  --rand: #E3DDD0;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  /* Systemschriften: schnell, keine Datei von fremden Servern nötig (siehe fonts/README.txt) */
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--weiss);
+}
+.inhalt { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+h1, h2, h3 { color: var(--haupt); line-height: 1.25; margin: 0 0 16px; }
+h1 { font-size: 40px; }
+h2 { font-size: 28px; }
+h3 { font-size: 20px; }
+p { margin: 0 0 16px; max-width: 65ch; }
+a { color: var(--akzent); }
+
+/* Überlaufschutz: sehr lange Wörter dürfen umbrechen, damit nichts seitlich herausragt */
+h1, h2, h3, p, a { overflow-wrap: anywhere; }
+
+/* Sichtbarer Tastatur-Fokus */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--haupt);
+  outline-offset: 3px;
+}
+
+/* Link zum Direktsprung für Tastatur und Screenreader */
+.skip { position: absolute; left: -999px; top: 0; background: var(--weiss); padding: 12px; }
+.skip:focus { left: 8px; top: 8px; z-index: 10; }
+
+/* Demo-Hinweis */
+.demo-streifen {
+  background: var(--haupt);
+  color: var(--weiss);
+  text-align: center;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Kopfbereich */
+.kopf { border-bottom: 1px solid var(--rand); background: var(--weiss); }
+.kopf .inhalt {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px;
+}
+.logo { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; color: var(--haupt); text-decoration: none; }
+.nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; }
+.nav a { color: var(--haupt); text-decoration: none; font-weight: 600; display: inline-block; padding: 10px 4px; min-height: 44px; }
+.nav a:hover { text-decoration: underline; }
+.warenkorb { color: var(--haupt); font-weight: 700; text-decoration: none; padding: 10px 14px; border: 2px solid var(--haupt); border-radius: 8px; display: inline-block; min-height: 44px; }
+
+/* Menü-Schaltfläche (nur auf dem Handy sichtbar, siehe unten) – Stil wie der Warenkorb-Button */
+.menue-knopf {
+  display: none;
+  font: inherit; font-weight: 700; color: var(--haupt);
+  background: var(--weiss); border: 2px solid var(--haupt); border-radius: 8px;
+  padding: 10px 14px; min-height: 44px; cursor: pointer;
+}
+.menue-knopf:hover { background: var(--papier); }
+
+/* Startbereich */
+.start { background: var(--papier); padding: 72px 0; }
+.start .inhalt { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
+.start .inhalt > * { min-width: 0; }
+.start .unter { font-size: 20px; color: var(--text-leise); }
+.start-flaeche {
+  background: var(--weiss); border: 1px solid var(--rand); border-radius: 12px;
+  padding: 32px; display: flex; justify-content: center; align-items: center; min-height: 240px;
+}
+
+/* Buttons */
+.button {
+  display: inline-block; background: var(--akzent); color: var(--weiss);
+  font-weight: 700; font-size: 18px; text-decoration: none;
+  padding: 12px 24px; min-height: 44px; border-radius: 8px; border: 0; cursor: pointer;
+}
+.button:hover { filter: brightness(0.92); }
+
+/* Produktbereich */
+.produkte { padding: 72px 0; }
+.karten { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
+.karte {
+  background: var(--weiss); border: 1px solid var(--rand); border-radius: 12px;
+  padding: 24px; display: flex; flex-direction: column; min-width: 0;
+}
+.karte:hover, .karte:focus-within { border-color: var(--haupt); }
+.bild {
+  aspect-ratio: 4 / 3; background: var(--papier); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+}
+.bild svg { width: 55%; height: auto; }
+.karte p { flex-grow: 1; }
+.preis { font-size: 26px; font-weight: 800; color: var(--text); margin: 0; }
+.preis-hinweis { font-size: 14px; color: var(--text-leise); margin: 0 0 16px; }
+
+/* Servicebereich */
+.service { background: var(--papier); padding: 72px 0; }
+.service-liste { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
+.service-block { background: var(--weiss); border: 1px solid var(--rand); border-radius: 12px; padding: 24px; min-width: 0; }
+.service-block p { margin: 0; }
+
+/* Fußbereich */
+.fuss { background: var(--haupt-dunkel); color: var(--weiss); padding: 48px 0; font-size: 16px; }
+.fuss a { color: var(--weiss); }
+.fuss ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 0; margin: 0 0 24px; }
+/* Tippfläche: Links im Fußbereich mindestens 24 px hoch */
+.fuss li a { display: inline-block; min-height: 24px; }
+.fuss p { font-size: 14px; max-width: none; margin-bottom: 8px; }
+
+/* Handy */
+@media (max-width: 800px) {
+  h1 { font-size: 30px; }
+  .start { padding: 48px 0; }
+  .start .inhalt, .karten, .service-liste { grid-template-columns: 1fr; }
+  .produkte, .service { padding: 48px 0; }
+
+  /* Mobiles Menü: greift nur, wenn app.js geladen ist (Klasse "js" am <html>-Element).
+     Ohne JavaScript bleibt die Navigation einfach immer sichtbar. */
+  .js .menue-knopf { display: inline-block; order: 2; }
+  .js .warenkorb { order: 3; }
+  .js .nav { order: 4; flex-basis: 100%; display: none; }   /* zugeklappt */
+  .js.nav-offen .nav { display: block; }                    /* aufgeklappt */
+  .js .nav ul { flex-direction: column; gap: 0; }
+}

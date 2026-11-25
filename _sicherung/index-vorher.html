@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WERKSTATT24 – Demo-Shop für Heimwerker-Einsteiger</title>
+<style>
+  /* ===== FARBEN: hier ändern, gilt für die ganze Seite ===== */
+  :root {
+    --haupt: #1F4E5F;        /* Petrol */
+    --haupt-dunkel: #173B49; /* Fußbereich */
+    --akzent: #B34700;       /* Orange, nur für Buttons und Links */
+    --papier: #F5F2EC;       /* Hintergrund Startbereich/Service */
+    --weiss: #FFFFFF;
+    --text: #222B30;
+    --text-leise: #4A565C;
+    --rand: #E3DDD0;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--weiss);
+  }
+  .inhalt { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { color: var(--haupt); line-height: 1.25; margin: 0 0 16px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 20px; }
+  p { margin: 0 0 16px; max-width: 65ch; }
+  a { color: var(--akzent); }
+
+  /* Sichtbarer Tastatur-Fokus */
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--haupt);
+    outline-offset: 3px;
+  }
+
+  /* Link zum Direktsprung für Tastatur und Screenreader */
+  .skip { position: absolute; left: -999px; top: 0; background: var(--weiss); padding: 12px; }
+  .skip:focus { left: 8px; top: 8px; z-index: 10; }
+
+  /* Demo-Hinweis */
+  .demo-streifen {
+    background: var(--haupt);
+    color: var(--weiss);
+    text-align: center;
+    padding: 10px 24px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* Kopfbereich */
+  .kopf { border-bottom: 1px solid var(--rand); background: var(--weiss); }
+  .kopf .inhalt {
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px;
+  }
+  .logo { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; color: var(--haupt); text-decoration: none; }
+  .nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; }
+  .nav a { color: var(--haupt); text-decoration: none; font-weight: 600; display: inline-block; padding: 10px 4px; min-height: 44px; }
+  .nav a:hover { text-decoration: underline; }
+  .warenkorb { color: var(--haupt); font-weight: 700; text-decoration: none; padding: 10px 14px; border: 2px solid var(--haupt); border-radius: 8px; display: inline-block; min-height: 44px; }
+
+  /* Startbereich */
+  .start { background: var(--papier); padding: 72px 0; }
+  .start .inhalt { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
+  .start .unter { font-size: 20px; color: var(--text-leise); }
+  .start-flaeche {
+    background: var(--weiss); border: 1px solid var(--rand); border-radius: 12px;
+    padding: 32px; display: flex; justify-content: center; align-items: center; min-height: 240px;
+  }
+
+  /* Buttons */
+  .button {
+    display: inline-block; background: var(--akzent); color: var(--weiss);
+    font-weight: 700; font-size: 18px; text-decoration: none;
+    padding: 12px 24px; min-height: 44px; border-radius: 8px; border: 0; cursor: pointer;
+  }
+  .button:hover { filter: brightness(0.92); }
+
+  /* Produktbereich */
+  .produkte { padding: 72px 0; }
+  .karten { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
+  .karte {
+    background: var(--weiss); border: 1px solid var(--rand); border-radius: 12px;
+    padding: 24px; display: flex; flex-direction: column;
+  }
+  .karte:hover, .karte:focus-within { border-color: var(--haupt); }
+  .bild {
+    aspect-ratio: 4 / 3; background: var(--papier); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+  }
+  .bild svg { width: 55%; height: auto; }
+  .karte p { flex-grow: 1; }
+  .preis { font-size: 26px; font-weight: 800; color: var(--text); margin: 0; }
+  .preis-hinweis { font-size: 14px; color: var(--text-leise); margin: 0 0 16px; }
+
+  /* Servicebereich */
+  .service { background: var(--papier); padding: 72px 0; }
+  .service-liste { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
+  .service-block { background: var(--weiss); border: 1px solid var(--rand); border-radius: 12px; padding: 24px; }
+  .service-block p { margin: 0; }
+
+  /* Fußbereich */
+  .fuss { background: var(--haupt-dunkel); color: var(--weiss); padding: 48px 0; font-size: 16px; }
+  .fuss a { color: var(--weiss); }
+  .fuss ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 0; margin: 0 0 24px; }
+  .fuss p { font-size: 14px; max-width: none; margin-bottom: 8px; }
+
+  /* Handy */
+  @media (max-width: 800px) {
+    h1 { font-size: 30px; }
+    .start { padding: 48px 0; }
+    .start .inhalt, .karten, .service-liste { grid-template-columns: 1fr; }
+    .produkte, .service { padding: 48px 0; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#hauptinhalt">Zum Inhalt springen</a>
+
+<div class="demo-streifen" role="note">Demo-Shop: keine echten Bestellungen</div>
+
+<header class="kopf">
+  <div class="inhalt">
+    <a class="logo" href="#">WERKSTATT24</a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <ul>
+        <li><a href="#start">Start</a></li>
+        <li><a href="#produkte">Produkte</a></li>
+        <li><a href="#service">Service</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+    <a class="warenkorb" href="#">Warenkorb (0)</a>
+  </div>
+</header>
+
+<main id="hauptinhalt">
+
+  <section class="start" id="start" aria-labelledby="start-titel">
+    <div class="inhalt">
+      <div>
+        <h1 id="start-titel">Alles, was du für dein Projekt brauchst – easy erklärt, easy gemacht.</h1>
+        <p class="unter">Passende Werkzeuge, klare Erklärungen. Das schaffst du!</p>
+        <a class="button" href="#produkte">Produkte ansehen</a>
+      </div>
+      <div class="start-flaeche" aria-hidden="true">
+        <!-- Gezeichnetes Symbol: Schraube, direkt im Code, kein externes Bild -->
+        <svg viewBox="0 0 120 120" width="160" height="160">
+          <circle cx="60" cy="60" r="52" fill="#F5F2EC" stroke="#1F4E5F" stroke-width="4"/>
+          <path d="M40 40 L80 80 M80 40 L40 80" stroke="#B34700" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="produkte" id="produkte" aria-labelledby="produkte-titel">
+    <div class="inhalt">
+      <h2 id="produkte-titel">Deine Auswahl</h2>
+
+      <div class="karten">
+
+        <article class="karte">
+          <div class="bild" aria-hidden="true">
+            <svg viewBox="0 0 120 90">
+              <!-- Symbol Akkuschrauber (vereinfacht) -->
+              <rect x="20" y="25" width="60" height="22" rx="8" fill="#1F4E5F"/>
+              <rect x="80" y="31" width="22" height="10" rx="3" fill="#B34700"/>
+              <rect x="36" y="45" width="18" height="34" rx="6" fill="#1F4E5F"/>
+            </svg>
+          </div>
+          <h3>Akkuschrauber W24 Compact 18V</h3>
+          <p>Handlicher Akkuschrauber zum Bohren und Schrauben.</p>
+          <p class="preis">79,90 €</p>
+          <p class="preis-hinweis">inkl. MwSt., zzgl. Versand</p>
+          <a class="button" href="#">Zum Produkt</a>
+        </article>
+
+        <article class="karte">
+          <div class="bild" aria-hidden="true">
+            <svg viewBox="0 0 120 90">
+              <!-- Symbol Werkzeugkoffer (vereinfacht) -->
+              <rect x="18" y="30" width="84" height="46" rx="6" fill="#1F4E5F"/>
+              <path d="M44 30 V22 H76 V30" fill="none" stroke="#1F4E5F" stroke-width="6"/>
+              <rect x="54" y="46" width="12" height="10" rx="2" fill="#B34700"/>
+            </svg>
+          </div>
+          <h3>Werkzeugkoffer W24 Basic, 45-teilig</h3>
+          <p>Grundausstattung an Handwerkzeug im Koffer.</p>
+          <p class="preis">49,90 €</p>
+          <p class="preis-hinweis">inkl. MwSt., zzgl. Versand</p>
+          <a class="button" href="#">Zum Produkt</a>
+        </article>
+
+        <article class="karte">
+          <div class="bild" aria-hidden="true">
+            <svg viewBox="0 0 120 90">
+              <!-- Symbol Schraube und Dübel (vereinfacht) -->
+              <rect x="30" y="20" width="28" height="8" rx="3" fill="#1F4E5F"/>
+              <rect x="41" y="28" width="6" height="46" fill="#1F4E5F"/>
+              <rect x="72" y="34" width="18" height="40" rx="6" fill="#B34700"/>
+            </svg>
+          </div>
+          <h3>Schrauben und Dübel-Set Universal W24, 150-teilig</h3>
+          <p>Sortiment aus Schrauben und Dübeln für typische Befestigungen.</p>
+          <p class="preis">14,90 €</p>
+          <p class="preis-hinweis">inkl. MwSt., zzgl. Versand</p>
+          <a class="button" href="#">Zum Produkt</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="service" id="service" aria-labelledby="service-titel">
+    <div class="inhalt">
+      <h2 id="service-titel">Darauf kannst du dich verlassen</h2>
+      <div class="service-liste">
+        <div class="service-block">
+          <h3>Einfach erklärt</h3>
+          <p>Jedes Produkt kommt mit klaren Worten und Beispielen, wofür du es nutzen kannst.</p>
+        </div>
+        <div class="service-block">
+          <h3>Übersichtlich</h3>
+          <p>Wenige, passende Produkte statt endloser Auswahl.</p>
+        </div>
+        <div class="service-block">
+          <h3>Fair</h3>
+          <p>Einsteigerfreundliche Preise, damit dein erstes Projekt nicht teuer wird.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="fuss" id="kontakt">
+  <div class="inhalt">
+    <ul>
+      <li><a href="#">Impressum (Platzhalter, folgt)</a></li>
+      <li><a href="#">Datenschutzerklärung (Platzhalter, folgt)</a></li>
+    </ul>
+    <p><strong>WERKSTATT24 ist ein fiktiver Demo-Shop.</strong> Alle Unternehmens- und Produktdaten sind erfunden. Es gibt keine echten Bestellungen und keine Zahlungsabwicklung.</p>
+    <p>Alle Preise sind fiktiv und gelten nur im Demo-Kontext. Preise inkl. MwSt., zzgl. Versand.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+# ===== Geheimnisse: nie sichern! =====
+# Zugangsdaten, API-Schlüssel und Passwörter gehören in .env-Dateien
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+secrets/
+credentials*.json
+
+# ===== Lokale Einstellungen von Claude Code =====
+.claude/settings.local.json
+
+# ===== Programme und Abhängigkeiten (falls später nötig) =====
+node_modules/
+
+# ===== Betriebssystem- und Editor-Dateien =====
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
