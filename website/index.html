@@ -15,17 +15,17 @@
 
 <header class="kopf">
   <div class="inhalt">
-    <a class="logo" href="#">WERKSTATT24</a>
+    <a class="logo" href="index.html">WERKSTATT24</a>
     <button type="button" class="menue-knopf" aria-expanded="false" aria-controls="hauptnavigation">Menü</button>
     <nav class="nav" id="hauptnavigation" aria-label="Hauptnavigation">
       <ul>
-        <li><a href="#start">Start</a></li>
-        <li><a href="#produkte">Produkte</a></li>
-        <li><a href="#service">Service</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="index.html#start">Start</a></li>
+        <li><a href="index.html#produkte">Produkte</a></li>
+        <li><a href="index.html#service">Service</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
       </ul>
     </nav>
-    <a class="warenkorb" href="#">Warenkorb (0)</a>
+    <a class="warenkorb" href="warenkorb.html">Warenkorb (0)</a>
   </div>
 </header>
 
@@ -55,8 +55,8 @@
       <div class="karten">
 
         <article class="karte">
-          <div class="bild" aria-hidden="true">
-            <svg viewBox="0 0 120 90">
+          <div class="bild">
+            <svg viewBox="0 0 120 90" role="img" aria-label="Vereinfachte Illustration eines Akkuschraubers: petrolfarbenes Gehäuse mit Griff und oranger Bit-Aufnahme">
               <!-- Symbol Akkuschrauber (vereinfacht) -->
               <rect x="20" y="25" width="60" height="22" rx="8" fill="#1F4E5F"/>
               <rect x="80" y="31" width="22" height="10" rx="3" fill="#B34700"/>
@@ -67,12 +67,16 @@
           <p>Handlicher Akkuschrauber zum Bohren und Schrauben.</p>
           <p class="preis">79,90 €</p>
           <p class="preis-hinweis">inkl. MwSt., zzgl. Versand</p>
-          <a class="button" href="#">Zum Produkt</a>
+          <div class="karte-knoepfe">
+            <a class="button" href="produkte/akkuschrauber-w24-compact-18v.html">Zum Produkt</a>
+            <button type="button" class="button-zweit" data-produkt-id="akkuschrauber-w24-compact-18v">In den Warenkorb</button>
+          </div>
+          <div class="korb-meldung" role="status" aria-live="polite"></div>
         </article>
 
         <article class="karte">
-          <div class="bild" aria-hidden="true">
-            <svg viewBox="0 0 120 90">
+          <div class="bild">
+            <svg viewBox="0 0 120 90" role="img" aria-label="Vereinfachte Illustration eines geschlossenen Werkzeugkoffers in Petrol mit Tragegriff und orangem Verschluss">
               <!-- Symbol Werkzeugkoffer (vereinfacht) -->
               <rect x="18" y="30" width="84" height="46" rx="6" fill="#1F4E5F"/>
               <path d="M44 30 V22 H76 V30" fill="none" stroke="#1F4E5F" stroke-width="6"/>
@@ -83,12 +87,16 @@
           <p>Grundausstattung an Handwerkzeug im Koffer.</p>
           <p class="preis">49,90 €</p>
           <p class="preis-hinweis">inkl. MwSt., zzgl. Versand</p>
-          <a class="button" href="#">Zum Produkt</a>
+          <div class="karte-knoepfe">
+            <a class="button" href="produkte/werkzeugkoffer-w24-basic-45-teilig.html">Zum Produkt</a>
+            <button type="button" class="button-zweit" data-produkt-id="werkzeugkoffer-w24-basic-45-teilig">In den Warenkorb</button>
+          </div>
+          <div class="korb-meldung" role="status" aria-live="polite"></div>
         </article>
 
         <article class="karte">
-          <div class="bild" aria-hidden="true">
-            <svg viewBox="0 0 120 90">
+          <div class="bild">
+            <svg viewBox="0 0 120 90" role="img" aria-label="Vereinfachte Illustration einer Schraube in Petrol und eines orangen Dübels">
               <!-- Symbol Schraube und Dübel (vereinfacht) -->
               <rect x="30" y="20" width="28" height="8" rx="3" fill="#1F4E5F"/>
               <rect x="41" y="28" width="6" height="46" fill="#1F4E5F"/>
@@ -99,7 +107,11 @@
           <p>Sortiment aus Schrauben und Dübeln für typische Befestigungen.</p>
           <p class="preis">14,90 €</p>
           <p class="preis-hinweis">inkl. MwSt., zzgl. Versand</p>
-          <a class="button" href="#">Zum Produkt</a>
+          <div class="karte-knoepfe">
+            <a class="button" href="produkte/schrauben-duebel-set-universal-w24-150-teilig.html">Zum Produkt</a>
+            <button type="button" class="button-zweit" data-produkt-id="schrauben-duebel-set-universal-w24-150-teilig">In den Warenkorb</button>
+          </div>
+          <div class="korb-meldung" role="status" aria-live="polite"></div>
         </article>
 
       </div>

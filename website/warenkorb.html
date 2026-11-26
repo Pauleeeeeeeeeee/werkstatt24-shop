@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warenkorb – WERKSTATT24</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#hauptinhalt">Zum Inhalt springen</a>
+
+<div class="demo-streifen" role="note">Demo-Shop: keine echten Bestellungen</div>
+
+<header class="kopf">
+  <div class="inhalt">
+    <a class="logo" href="index.html">WERKSTATT24</a>
+    <button type="button" class="menue-knopf" aria-expanded="false" aria-controls="hauptnavigation">Menü</button>
+    <nav class="nav" id="hauptnavigation" aria-label="Hauptnavigation">
+      <ul>
+        <li><a href="index.html#start">Start</a></li>
+        <li><a href="index.html#produkte">Produkte</a></li>
+        <li><a href="index.html#service">Service</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+    <a class="warenkorb" href="warenkorb.html" aria-current="page">Warenkorb (0)</a>
+  </div>
+</header>
+
+<main id="hauptinhalt">
+  <div class="korb-seite">
+    <div class="inhalt">
+
+      <p class="zurueck"><a href="index.html#produkte">← Weiter einkaufen: zur Produktübersicht</a></p>
+
+      <h1>Dein Warenkorb</h1>
+      <p class="demo-hinweis-klein">Demo: Es wird nichts bestellt und nichts bezahlt. Alle Preise sind fiktiv.</p>
+
+      <div id="warenkorb-inhalt">
+
+        <noscript>
+          <p>Für den Warenkorb braucht diese Seite JavaScript. Bitte schalte JavaScript in deinem Browser ein.</p>
+        </noscript>
+
+        <!-- Leerer Warenkorb -->
+        <div id="korb-leer" class="korb-box" hidden>
+          <h2 id="korb-leer-titel" tabindex="-1">Dein Warenkorb ist leer.</h2>
+          <p>Du hast noch nichts hineingelegt. Schau dir unsere Produkte an.</p>
+          <a class="button" href="index.html#produkte">Zur Produktübersicht</a>
+        </div>
+
+        <!-- Gefüllter Warenkorb -->
+        <div id="korb-voll" hidden>
+          <table class="korb-tabelle">
+            <caption class="nur-leser">Produkte in deinem Warenkorb</caption>
+            <thead>
+              <tr>
+                <th scope="col">Produkt</th>
+                <th scope="col">Einzelpreis</th>
+                <th scope="col">Menge</th>
+                <th scope="col">Summe</th>
+                <th scope="col"><span class="nur-leser">Aktion</span></th>
+              </tr>
+            </thead>
+            <tbody id="korb-zeilen"></tbody>
+          </table>
+
+          <h2>Zusammenfassung</h2>
+          <dl class="summen">
+            <div><dt>Zwischensumme</dt><dd id="summe-zwischen"></dd></div>
+            <div><dt>Versandkosten</dt><dd id="summe-versand"></dd></div>
+            <div class="gesamt"><dt>Gesamtsumme (inkl. MwSt. und Versandkosten)</dt><dd id="summe-gesamt"></dd></div>
+          </dl>
+          <p id="korb-steuerhinweis" class="summen-hinweis"></p>
+          <p class="summen-hinweis">Alle Preise inkl. MwSt. Versand: pauschal 4,90 €, ab 50,00 € Warenwert kostenlos. Lieferzeit 2–4 Werktage. Alles fiktiv.</p>
+
+          <button type="button" class="button" id="bestellen">Demo-Bestellung absenden</button>
+          <p class="demo-hinweis-klein">Es werden keine persönlichen Daten abgefragt. Es wird nichts bestellt und nichts bezahlt.</p>
+        </div>
+
+        <!-- Nach der Demo-Bestellung -->
+        <div id="korb-fertig" class="korb-box" hidden>
+          <h2 id="korb-fertig-titel" tabindex="-1">Danke für deine Demo-Bestellung!</h2>
+          <p>Das war nur eine Demo: Es wurde nichts bestellt und nichts bezahlt. Dein Warenkorb ist jetzt leer.</p>
+          <a class="button" href="index.html#produkte">Zur Produktübersicht</a>
+        </div>
+
+      </div>
+
+      <!-- Ansage von Änderungen für Screenreader -->
+      <div id="korb-status" class="nur-leser" role="status" aria-live="polite"></div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="fuss" id="kontakt">
+  <div class="inhalt">
+    <ul>
+      <li><a href="#">Impressum (Platzhalter, folgt)</a></li>
+      <li><a href="#">Datenschutzerklärung (Platzhalter, folgt)</a></li>
+    </ul>
+    <p><strong>WERKSTATT24 ist ein fiktiver Demo-Shop.</strong> Alle Unternehmens- und Produktdaten sind erfunden. Es gibt keine echten Bestellungen und keine Zahlungsabwicklung.</p>
+    <p>Alle Preise sind fiktiv und gelten nur im Demo-Kontext. Preise inkl. MwSt., zzgl. Versand.</p>
+  </div>
+</footer>
+
+</body>
+</html>

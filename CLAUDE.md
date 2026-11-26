@@ -53,7 +53,9 @@
 ## Projektstruktur und Regeln für die Website
 - `website/index.html` = Inhalt und Struktur (inkl. Inline-SVG-Symbole)
 - `website/css/style.css` = Gestaltung (Farbvariablen, Layout, Media Queries)
-- `website/js/app.js` = Verhalten (bisher nur das mobile Menü)
+- `website/produkte/` = eine Detailseite pro Produkt (siehe Abschnitt „Mehrseitige Website“)
+- `website/warenkorb.html` = Warenkorbseite (siehe Abschnitt „Warenkorb“)
+- `website/js/app.js` = Verhalten (mobiles Menü und Warenkorb)
 - `website/fonts/` = lokale Schriften mit Lizenzen (aktuell nur eine README, es werden Systemschriften genutzt)
 - `_sicherung/` = Sicherungskopie des Stands vor dem Umbau
 - Es werden keine externen Ressourcen geladen (keine Google Fonts, CDNs, externe Skripte, Bilder oder Icons).
@@ -61,3 +63,32 @@
 - Tippflächen sind mindestens 24 × 24 CSS-Pixel groß.
 - Ohne JavaScript bleibt die Navigation immer sichtbar.
 - Keine zusätzlichen Shop-Funktionen ohne meine Freigabe.
+
+## Mehrseitige Website (Regeln)
+- Jedes Produkt hat genau eine Detailseite in `website/produkte/`.
+- Dateinamen nur mit Kleinbuchstaben und Bindestrichen, Umlaute und ß ausgeschrieben (ü → ue), z. B. `akkuschrauber-w24-compact-18v.html`.
+- Relative Pfade: Startseite nutzt `css/style.css`, `js/app.js` und `produkte/<datei>.html`. Produktseiten nutzen `../css/style.css`, `../js/app.js` und `../index.html`. Keine absoluten Pfade, keine externen Ressourcen.
+- Kopfzeile, Navigation, Demo-Streifen und Fußzeile sind auf allen Seiten gleich. Wird eine davon geändert, werden alle Seiten angepasst. Navigationslinks zeigen immer auf `index.html#…` (bzw. `../index.html#…`).
+- Alle Seiten verwenden dieselbe `style.css` und `app.js`. Neue Stile werden nur ergänzt, bestehende nicht ohne Grund geändert.
+- Produktdaten stehen direkt im HTML (keine Datenbank, kein JSON, kein Skript).
+- Produktname, Bild und Preis müssen auf Startseite und Detailseite übereinstimmen. Änderungen nur nach meiner Freigabe.
+- Jede Produktillustration (Startseite und Detailseite) hat einen aussagekräftigen Alternativtext (`role="img"` mit `aria-label`).
+- Preise haben immer den Hinweis „inkl. MwSt., zzgl. Versand“.
+- Versand, Lieferzeit und Rückgabe sind fiktiv und auf allen Produktseiten gleich: Versand pauschal 4,90 €, ab 50,00 € Warenwert kostenlos; Lieferzeit 2–4 Werktage; Rückgabe innerhalb von 14 Tagen ab Erhalt.
+- Alle Produktdetailseiten enthalten dieselbe Breadcrumb-Navigation (`<nav class="brotkrumen" aria-label="Brotkrumen">` mit `<ol>`), direkt unter der Kopfzeile und über den Produktinformationen: Startseite (`../index.html`) › Produkte (`../index.html#produkte`) › aktueller Produktname. Der aktuelle Name ist kein Link, sondern `aria-current="page"`. Bei neuen Produktseiten wird sie mit angelegt. Es gibt nur eine Breadcrumb pro Seite.
+- Jede Produktseite hat Rücklinks zur Produktübersicht (`../index.html#produkte`).
+- Neue Produkte: Karte auf der Startseite (mit „Zum Produkt“ und „In den Warenkorb“), neue Detailseite nach dem Muster der bestehenden Seiten und diese Regeln.
+
+## Warenkorb (Regeln)
+- Der Warenkorb ist eine Demo: keine echten Bestellungen, keine Zahlung, keine persönlichen Daten, keine Eingabefelder dafür.
+- Die Logik steht in `website/js/app.js`, die Seite in `website/warenkorb.html`, die Gestaltung in `style.css`. Keine externen Bibliotheken.
+- Es gibt keine eigene Produktliste. Jeder „In den Warenkorb“-Button hat `data-produkt-id` (= Dateiname des Produkts ohne `.html`). Name (`h1`/`h3`) und Preis (`.preis`) liest `app.js` aus dem HTML der Karte bzw. Produktseite. Neben dem Button steht ein `div.korb-meldung` mit `role="status"` für die Bestätigung.
+- LocalStorage: ein Schlüssel `werkstatt24-warenkorb`, Wert = JSON-Liste `[{id, name, preisCent, menge}]`. Geschrieben wird erst beim ersten Hinzufügen, beim reinen Seitenaufruf nie. Ist der Warenkorb leer, wird der Eintrag gelöscht (`removeItem`).
+- Gelesene Daten werden geprüft (ganze Zahlen, Menge 1–10). Ausgabe nur mit `textContent`, nie mit `innerHTML`. Zugriffe auf LocalStorage immer mit `try/catch`.
+- Rechnen nur in ganzen Cent, Anzeige im deutschen Euroformat (`Intl.NumberFormat("de-DE")`).
+- Menge 1–10, Änderung über Plus-/Minus-Schaltflächen mit verständlichen Beschriftungen für Screenreader. Entfernen einzeln möglich.
+- Versand: 4,90 € pauschal, ab 50,00 € Zwischensumme kostenlos. Die Gesamtsumme zeigt eindeutig, dass Mehrwertsteuer und Versandkosten enthalten sind.
+- Der Zähler „Warenkorb (n)“ in der Kopfzeile zeigt die Gesamtzahl aller Artikel und wird auf jeder Seite von `app.js` gesetzt. Der Link zeigt auf `warenkorb.html` bzw. `../warenkorb.html`.
+- Änderungen (Hinzufügen, Menge, Entfernen) werden sichtbar und per `role="status"` angesagt. Der Fokus geht nach dem Neuzeichnen nie verloren.
+- Demo-Bestellung: Button „Demo-Bestellung absenden“ zeigt eine Bestätigung, leert den Warenkorb und löscht den Eintrag.
+- Neue Produkte brauchen keinen Eintrag im Skript, nur den Button mit `data-produkt-id` im HTML.
